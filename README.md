@@ -1,5 +1,5 @@
 # snapchat-animation
-##This is a SnapChat Stories Clone.  
+## This is a SnapChat Stories Clone.  
 
 ## Installation
 
