@@ -6,7 +6,7 @@ import { Video } from "expo-av";
 
 import { SnapchatRoutes } from "./Model";
 import { SharedElement } from "react-navigation-shared-element";
-import Animated, { runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { snapPoint } from "react-native-redash";
 interface StoryProps {
   navigation: NavigationProp<SnapchatRoutes, "Story">;
@@ -42,11 +42,13 @@ const Story = ({ route, navigation }: StoryProps) => {
 
   });
   const animatedStyle = useAnimatedStyle(() => {
+    const scale = interpolate(translateY.value, [0, height], [1, 0.4], Extrapolate.CLAMP);
     return {
       flex: 1,
       transform: [
-        { translateX: translateX.value },
-        { translateY: translateY.value }
+        { translateX: translateX.value * scale },
+        { translateY: translateY.value * scale },
+        { scale },
       ]
     }
   })

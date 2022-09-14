@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SharedElement } from "react-navigation-shared-element";
 import { View, Image, StyleSheet, Dimensions, Pressable } from "react-native";
 
@@ -30,15 +30,22 @@ interface StoryThumbnailProps {
 }
 
 const StoryThumbnail = ({ story }: StoryThumbnailProps) => {
+  const [opacity, setOpacity] = useState(1);
   const navigation = useNavigation();
+  useFocusEffect(() => {
+    if (navigation.isFocused()) {
+      setOpacity(1);
+    }
+  });
   return (
     <Pressable
       style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
       onPress={() => {
         navigation.navigate("Story", { story });
+        setOpacity(0);
       }}
     >
-      <View style={[styles.container]}>
+      <View style={[styles.container, { opacity }]}>
         <SharedElement id={story.id} style={{ flex: 1 }}>
           <Image source={story.source} style={styles.image} />
         </SharedElement>
