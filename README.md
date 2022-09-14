@@ -13,4 +13,4 @@ expo install && yarn start
  
 ## Live App
 ### You can experience the Live App below
-[Expo App](expo.dev/@talalnuman/snapchat)
+[Expo App](https://expo.dev/@talalnuman/snapchat)
